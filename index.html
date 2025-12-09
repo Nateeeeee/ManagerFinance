@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <title>Gerenciador Financeiro</title>
+</head>
+<body>
+    <aside id="sidebar" class="sidebar">
+        <button id="toggleSidebar" class="toggle-btn">☰</button>
+        <nav>
+            <div class="nav-item sidebar-item active">
+                <span class="icon-slot"><i data-lucide="wallet"></i></span>
+                <span class="label">Registrar Gastos</span>
+            </div>
+            <div class="nav-item sidebar-item">
+                <span class="icon-slot"><i data-lucide="bar-chart-2"></i></span>
+                <span class="label">Dashboard</span>
+            </div>
+            <div class="nav-item sidebar-item">
+                <span class="icon-slot"><i data-lucide="settings"></i></span>
+                <span class="label">Configurações</span>
+            </div>
+        </nav>
+        <div class="avatar-container">
+            <img src="./avatar.png" class="avatar" />
+        </div>
+    </aside>
+    
+    <div class="main-container">
+        <header class="top-bar">
+            <button id="toggleSidebar" class="toggle-btn mobile-only">☰</button>
+        </header>
+
+    <main class="content">
+        <div class="chart-wrapper">
+            <canvas id="donut"></canvas>
+
+            <div class="legend">
+                <p><span class="dot essencial"></span> Essencial</p>
+                <p><span class="dot pessoal"></span> Pessoal</p>
+                <p><span class="dot outros"></span> Outros</p>
+            </div>
+
+            <div id="status-popup" class="status-popup">
+                <span class="status-text"></span>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide"></script>
+    <script src="renderer.js"></script>
+
+</body>
+</html>

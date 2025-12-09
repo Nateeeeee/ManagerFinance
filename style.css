@@ -1,0 +1,385 @@
+:root {
+    --primary-color: #0081A7;
+    --accent-color: #f47c72;
+    --chart-color-1: #f47c72;
+    --chart-color-2: #36d4cb;
+    --chart-color-3: #007a9b;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-color);
+    display: flex;
+    height: 100vh;
+    color: #2d3436;
+    overflow: hidden;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.top-bar {
+    background: var(--primary-color);
+    height: 90px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, var(--primary-color), #00607d);
+    z-index: 10;
+}
+
+.avatar-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--card-bg);
+    transition: all 0.3s ease;
+    margin-top: auto;
+    opacity: 1;
+    transform: scale(1);
+    align-self: center;
+    margin-bottom: 0;
+}
+
+.avatar-container:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+    gap: 30px;
+}
+
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    padding: 25px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+#donut {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.legend {
+    margin-top: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.legend p {
+    margin: 0;
+    font-size: clamp(14px, 1.6vw, 16px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-color);
+    border-radius: var(--radius-sm);
+    transition: transform 0.2s ease;
+}
+
+.legend p:hover {
+    transform: translateX(5px);
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.essencial { background: var(--chart-color-1);}
+.pessoal { background: var(--chart-color-2);}
+.outros { background: var(--chart-color-3);}
+
+.legend p:hover .dot {
+    transform: scale(1.2);
+}
+
+.status-popup {
+    position: absolute;
+    background: rgba(45, 52, 54, 0.95);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.status-popup.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+    .content {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 30px;
+    }
+
+    .avatar-container {
+        margin: 0 0 20px 0;
+    }
+
+    .chart-wrapper {
+        width: 80%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-wrapper {
+        width: 90%;
+        max-width: 200px;
+    }
+
+    #donut {
+        max-width: 100%;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.chart-wrapper {
+    animation: popIn 0.5s ease-out;
+    transform-origin: center;
+}
+
+.sidebar {
+    width: 250px;
+    background: var(--card-bg);
+    height: 100vh;
+    padding: 20px 16px;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1000;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ---- NAV ---- */
+
+/* Estrutura normal do item */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: padding 0.22s ease, justify-content 0.22s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* item ativo (marcação azul) */
+.nav-item.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Ícones: nunca desaparecem */
+.nav-item i {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* anima movimento suave dos ícones */
+    transition: transform 0.22s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0);
+}
+
+/* Wrapper do ícone */
+.icon-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: margin 0.22s ease, transform 0.22s ease;
+}
+
+/* Texto do item */
+.nav-item .label {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
+    opacity: 1;
+    transition: max-width 0.22s ease, opacity 0.18s ease;
+}
+
+/* ---- SIDEBAR FECHADO ---- */
+.sidebar.collapsed {
+    width: 70px;
+    padding: 18px 8px;
+}
+
+/* Ícones ficam centralizados, mas SEM sumir */
+.sidebar.collapsed .nav-item {
+    justify-content: center;
+    gap: 0;
+}
+
+/* O wrapper do ícone se centraliza suavemente */
+.sidebar.collapsed .icon-slot {
+    margin: 0 auto;
+    transform: scale(1);
+}
+
+/* Garantia máxima de que ícone não vai sumir */
+.sidebar.collapsed .nav-item i {
+    opacity: 1 !important;
+    transform: translateX(0);
+}
+
+/* Texto completamente desaparece quando sidebar está fechada */
+.sidebar.collapsed .nav-item .label {
+    max-width: 0;
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+}
+
+.sidebar .avatar-container {
+    margin-top: auto;
+}
+
+/* BOTÃO HAMBÚRGUER — SEMPRE VISÍVEL */
+.toggle-btn {
+    background: var(--card-bg);   /* mantém o fundo branco */
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    color: #0081A7;              /* cor do ícone */
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* garante que não suma no colapse */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* HOVER opcional (visual de clique) */
+.toggle-btn:hover {
+    background: var(--bg-color);
+    color: var(--primary-color);
+}
+
+/* Quando a sidebar estiver recolhida, apenas centraliza melhor o botão ao topo */
+.sidebar.collapsed .toggle-btn {
+    margin: 0 auto;
+}
+
+.mobile-only { display: none; }
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -250px;
+        padding: 20px 16px;
+    }
+    
+    .sidebar.show {
+        left: 0;
+    }
+    
+    .mobile-only {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar nav {
+        margin-top: 20px;
+    }
+}
